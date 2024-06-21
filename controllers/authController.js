@@ -9,6 +9,8 @@ import catchAsync from '../utils/catchAsync.js';
 import AppError from '../utils/appError.js';
 import Email from '../utils/email.js';
 
+import { version } from '../utils/server.js';
+
 /** Others */
 const signToken = id =>
   jwt.sign({id}, process.env.JSONTOKEN, {
@@ -135,7 +137,7 @@ export const forgotenPassword = catchAsync(async (request, response, next) => {
   await user.save({validateBeforeSave: false});
 
   try {
-    const resetURL = `${request.protocol}://${request.get('host')}/api/v1/users/reset-password/${resetToken}`;
+    const resetURL = `${request.protocol}://${request.get('host')}/api/${version}/users/reset-password/${resetToken}`;
 
     await new Email(user, resetURL).sendPasswordReset();
 

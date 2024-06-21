@@ -9,6 +9,7 @@ import hpp from 'hpp';
 import {join, dirname} from 'path';
 import {fileURLToPath} from 'url';
 import cookieParser from 'cookie-parser';
+import compression from 'compression';
 
 /** Developer's Modules */
 import tourRouter from './routes/tourRoutes.js';
@@ -20,8 +21,9 @@ import ErrorHandler from './controllers/errorController.js';
 import viewRouter from './routes/viewRoutes.js';
 
 /** Others */
+import {version} from './utils/server.js'
+
 const app = express();
-const version = 'v1';
 
 // Get the directory name of the current module
 const __filename = fileURLToPath(import.meta.url);
@@ -105,6 +107,8 @@ app.use(
     ],
   })
 );
+
+app.use(compression());
 
 app.use(`/`, viewRouter);
 

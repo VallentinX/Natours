@@ -2,6 +2,7 @@
 import mongoose from 'mongoose';
 import {config} from 'dotenv';
 import app from './app.js';
+import {PORT} from './utils/server.js'
 
 /** Others */
 process.on('uncaughtException', error => {
@@ -13,8 +14,6 @@ process.on('uncaughtException', error => {
 config({path: './config.env'});
 
 /** Others */
-const port = process.env.PORT || 3000;
-
 const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DB_PASSWORD);
 
 mongoose
@@ -30,8 +29,8 @@ mongoose
   });
 
 /** Start Server */
-const server = app.listen(port, () => {
-  console.log(`Servers starts app on port ${port}...`);
+const server = app.listen(PORT, () => {
+  console.log(`Servers starts app on port ${PORT}...`);
 });
 
 process.on('unhandledRejection', error => {

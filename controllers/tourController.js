@@ -37,8 +37,6 @@ export const uploadTourImages = upload.fields([
 ]);
 
 export const resizeTourImages = catchAsync(async (request, response, next) => {
-  console.log(request.files);
-
   if (!request.files.imageCover || !request.files.images) return next();
 
   request.body.imageCover = `tour-${request.params.id}-${Date.now()}-cover.jpg`;

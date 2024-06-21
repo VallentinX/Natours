@@ -34,7 +34,7 @@ const errorDev = (error, request, response) => {
       stack: error.stack,
     });
 
-  console.error('🔴 Error! 🔴', error);
+  // console.error('🔴 Error! 🔴', error);
 
   return response.status(error.statusCode).render('error', {
     title: 'Something went wrong!',
@@ -51,7 +51,7 @@ const errorProd = (error, request, response) => {
         message: error.message,
       });
 
-    console.error('🔴 Error! 🔴', error);
+    // console.error('🔴 Error! 🔴', error);
 
     return response.status(500).json({
       status: 'Error!',
@@ -65,7 +65,7 @@ const errorProd = (error, request, response) => {
       code: error.statusCode,
     });
 
-  console.error('🔴 Error! 🔴', error);
+  // console.error('🔴 Error! 🔴', error);
 
   return response.status(error.statusCode).render('error', {
     title: 'Something went wrong!',
