@@ -1,0 +1,10 @@
+extends base
+
+block content
+  main.main
+    .error
+      .error__title
+        h1.heading-secondary.heading-secondary--error= code
+        h2.heading-secondary.heading-secondary--error Ups, something went wrong!
+        h2.error__emoji 😢
+      .error__msg= msg
