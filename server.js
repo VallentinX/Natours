@@ -1,24 +1,25 @@
 /** Modules */
 import mongoose from 'mongoose';
-import {config} from 'dotenv';
+import { config } from 'dotenv';
 import app from './app.js';
-import {PORT} from './utils/server.js'
+
+/** Developer's Modules */
 
 /** Others */
+config({path: './config.env'});
+
+const PORT = process.env.PORT || 3000;
+
 process.on('uncaughtException', error => {
   console.log(`${error.name} - ${error.message}! UNHANDLED EXCEPTION! Server's shutting down...`);
   process.exit(1);
 });
-
-/** Developer's Modules */
-config({path: './config.env'});
 
 /** Others */
 const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DB_PASSWORD);
 
 mongoose
   .connect(DB, {
-    // .connect(process.env.LOCAL_DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -26,6 +27,10 @@ mongoose
   })
   .then(() => {
     console.log('DB Connection successful');
+  })
+  .catch(err => {
+    console.log('DB Connection error:', err);
+    process.exit(1);
   });
 
 /** Start Server */
